@@ -1,10 +1,13 @@
 import {HttpClient} from '@angular/common/http';
 import { Component, OnInit, inject, signal, } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+// @ts-ignore
+import { NavComponent } from '../layout/nav/nav.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [NavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

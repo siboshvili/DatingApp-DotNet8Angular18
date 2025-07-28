@@ -3,11 +3,12 @@ import { Component, OnInit, inject, signal, } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { NavComponent } from '../layout/nav/nav.component';
 import { AccountService } from '../core/services/account.service';
+import {HomeComponent } from '../features/home/home.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavComponent],
+  imports: [NavComponent, HomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

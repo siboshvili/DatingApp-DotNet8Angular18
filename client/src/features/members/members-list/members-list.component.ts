@@ -3,10 +3,11 @@ import {MemberService} from '../../../core/services/member.service';
 import {Observable} from "rxjs";
 import {Member} from '../../../types/member';
 import {AsyncPipe} from "@angular/common";
+import {MemberCardComponent} from '../member-card/member-card.component';
 
 @Component({
     selector: 'app-members-list',
-    imports: [AsyncPipe],
+    imports: [AsyncPipe, MemberCardComponent],
     templateUrl: './members-list.component.html',
     styleUrl: './members-list.component.css'
 })

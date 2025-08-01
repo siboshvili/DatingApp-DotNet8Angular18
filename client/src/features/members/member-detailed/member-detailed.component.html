@@ -6,11 +6,11 @@
             <div class="card-body">
                 <div class="flex flex-col items-center">
                     <div class="flex text-2xl text-primary items-center">
-                        {{member.displayName}}, 25
+                        {{ member.displayName }}, {{ member.dateOfBirth | age }}
                     </div>
 
                     <div class="text-sm">
-                        {{member.city}}, {{member.country}}
+                        {{ member.city }}, {{ member.country }}
                     </div>
                 </div>
 
@@ -30,17 +30,12 @@
 
         <div class="card bg-base-100 w-3/4 p-6 flex flex-col h-[85vh]">
             <div class="flex justify-between items-center">
-                <h3 class="card-title text-3xl text-primary">{{title()}}</h3>
-               
-<!--                    <button (click)="memberService.editMode.set(!memberService.editMode())" class="btn btn-outline btn-primary">-->
-<!--                        {{memberService.editMode() ? 'Cancel' : 'Edit'}}-->
-<!--                    </button>-->
-              
+                <h3 class="card-title text-3xl text-primary">{{ title() }}</h3>
             </div>
 
             <div class="divider"></div>
             <div class="h-full">
-                <router-outlet />
+                <router-outlet/>
             </div>
         </div>
 

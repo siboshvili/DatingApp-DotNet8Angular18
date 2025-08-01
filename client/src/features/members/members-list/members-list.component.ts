@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {MemberService} from '../../../core/services/member.service';
+import {Observable} from "rxjs";
+import {Member} from '../../../types/member';
+import {AsyncPipe} from "@angular/common";
 
 @Component({
-  selector: 'app-members-list',
-  imports: [],
-  templateUrl: './members-list.component.html',
-  styleUrl: './members-list.component.css'
+    selector: 'app-members-list',
+    imports: [AsyncPipe],
+    templateUrl: './members-list.component.html',
+    styleUrl: './members-list.component.css'
 })
 export class MembersListComponent {
+    private memberService = inject(MemberService);
+    protected members$: Observable<Member[]>;
+    
+    constructor() {
+        this.members$ = this.memberService.getMembers();
+    }
+
 
 }

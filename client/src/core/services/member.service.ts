@@ -10,14 +10,14 @@ import {AccountService} from "./account.service";
 export class MemberService {
     private http = inject(HttpClient);
     private accountService = inject(AccountService);
-    private baseUrl = environment.apiUrl + '/members';
+    private baseUrl = environment.apiUrl + '/members/';
 
     getMembers() {
-        return this.http.get<Member[]>(this.baseUrl + 'members', this.getHttpOptions());
+        return this.http.get<Member[]>(this.baseUrl, this.getHttpOptions());
     }
 
     getMember(id: string) {
-        return this.http.get<Member>(this.baseUrl + '/members' + id, this.getHttpOptions());
+        return this.http.get<Member>(this.baseUrl + '/' + id, this.getHttpOptions());
     }
 
     private getHttpOptions() {

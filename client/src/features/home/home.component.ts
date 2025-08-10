@@ -9,7 +9,7 @@ import { RegisterComponent } from '../account/register/register.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  protected registerMode = signal(true);
+  protected registerMode = signal(false);
 
   showRegister(value: boolean) {
     this.registerMode.set(value);

@@ -17,12 +17,24 @@ public class MemberRepository(AppDbContext context) : IMemberRepository
         return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<PaginatedResult<Member>> GetMembersAsync(PagingParams pagingParams)
+    public async Task<PaginatedResult<Member>> GetMembersAsync(MemberParams memberParams)
     {
         var query = context.Members.AsQueryable();
         
+        query = query.Where(x => x.Id != memberParams.CurrentMemberId);
+
+        if (memberParams.Gender != null)
+        {
+            query = query.Where(x => x.Gender == memberParams.Gender);
+        }
+        
+        var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-memberParams.MaxAge - 1));
+        var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-memberParams.MinAge));
+        
+        query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+        
         return await PaginationHelper.CreateAsync(query, 
-            pagingParams.PageNumber, pagingParams.PageSize);
+            memberParams.PageNumber, memberParams.PageSize);
     }
 
     public async Task<Member?> GetMemberByIdAsync(string id)

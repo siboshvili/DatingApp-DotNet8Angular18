@@ -1,9 +1,10 @@
 import {inject, Injectable, signal} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment.development";
 import {Member, Photo} from "../../types/member";
 import {EditableMember} from "../../types/member";
-import { tap } from 'rxjs';
+import {tap} from 'rxjs';
+import {PaginatedResult} from "../../types/pagination";
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,13 @@ export class MemberService {
     editMode = signal(false);
     member = signal<Member | null>(null);
 
-    getMembers() {
-        return this.http.get<Member[]>(this.baseUrl + 'members');
+    getMembers(pageNumber = 1, pageSize = 10) {
+        let params = new HttpParams();
+
+        params = params.append('pageNumber', pageNumber);
+        params = params.append('pageSize', pageSize);
+
+        return this.http.get<PaginatedResult<Member>>(this.baseUrl + 'members', {params});
     }
 
     getMember(id: string) {
@@ -29,7 +35,7 @@ export class MemberService {
     getMemberPhotos(id: string) {
         return this.http.get<Photo[]>(this.baseUrl + 'members/' + id + '/photos');
     }
-    
+
     updateMember(member: EditableMember) {
         return this.http.put(this.baseUrl + 'members/', member);
     }
@@ -39,8 +45,8 @@ export class MemberService {
         formData.append('file', file);
         return this.http.post<Photo>(this.baseUrl + 'members/add-photo', formData);
     }
-    
-    setMainPhoto(photo: Photo){
+
+    setMainPhoto(photo: Photo) {
         return this.http.put(this.baseUrl + 'members/set-main-photo/' + photo.id, {});
     }
 

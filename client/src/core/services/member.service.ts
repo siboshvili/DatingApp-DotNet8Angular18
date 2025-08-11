@@ -21,7 +21,7 @@ export class MemberService {
         params = params.append('pageNumber', pageNumber);
         params = params.append('pageSize', pageSize);
 
-        return this.http.get<PaginatedResult<Member>>(this.baseUrl + 'members', {params});
+        return this.http.get<PaginatedResult<Member>>(this.baseUrl + 'members/', {params});
     }
 
     getMember(id: string) {

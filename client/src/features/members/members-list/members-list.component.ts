@@ -45,7 +45,8 @@ export class MembersListComponent implements OnInit {
     }
     
     onFilterChange(data: MemberParams) {
-        console.log('Filter data submitted:', data);
+        this.memberParams = data;
+        this.loadMembers()
     }
     
     resetFilters(){

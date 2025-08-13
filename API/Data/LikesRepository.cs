@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class LikesRepository(AppDbContext context) : ILikeRepository
+public class LikesRepository(AppDbContext context) : ILikesRepository
 {
     public async Task<MemberLike?> GetMemberLike(string sourceMemberId, string targetMemberId)
     {

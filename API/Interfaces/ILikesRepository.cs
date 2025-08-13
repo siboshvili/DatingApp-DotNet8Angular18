@@ -2,7 +2,7 @@ using API.Entities;
 
 namespace API.Interfaces;
 
-public interface ILikeRepository
+public interface ILikesRepository
 {
     Task<MemberLike?> GetMemberLike(string sourceMemberId, string targetMemberId);
     Task<IReadOnlyList<Member>> GetMemberLikes(string predicate, string memberId);

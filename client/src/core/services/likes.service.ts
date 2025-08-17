@@ -12,7 +12,7 @@ export class LikesService {
   likeIds = signal<string[]>([]);
   
   toggleLike(targetMemberId: string){
-    return this.http.post(`${this.baseUrl}/likes/${targetMemberId}`, {});
+    return this.http.post(`${this.baseUrl}likes/${targetMemberId}`, {});
   }
   
   getLikes(predicate: string){

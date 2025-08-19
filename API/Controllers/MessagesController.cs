@@ -43,4 +43,10 @@ public class MessagesController(
 
         return await messageRepository.GetMessagesFromMember(messageParams);
     }
+
+    [HttpGet("thread/{recipientId}")]
+    public async Task<ActionResult<IReadOnlyList<MessageDto>>> GetMessageThree(string recipientId)
+    {
+        return Ok(await messageRepository.GetMessageThread(User.GetMemberId(), recipientId));
+    }
 }

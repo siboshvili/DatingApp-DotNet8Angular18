@@ -52,7 +52,7 @@ public class Seed
                 MemberId = member.Id
             });
 
-            var result = await userManager.CreateAsync(user, "Pa$$0rd");
+            var result = await userManager.CreateAsync(user, "Pa$$0wrd");
             if (!result.Succeeded)
             {
                 Console.WriteLine(result.Errors.First().Description);
@@ -68,7 +68,7 @@ public class Seed
             DisplayName = "Admin"
         };
 
-        await userManager.CreateAsync(admin, "Pa$$0rd");
+        await userManager.CreateAsync(admin, "Pa$$w0rd");
         await userManager.AddToRolesAsync(admin, ["Admin", "Moderator"]);
     }
 }

@@ -5,12 +5,13 @@ import {ToastService} from '../../core/services/toast.service';
 import {Router, RouterLink, RouterModule} from '@angular/router';
 import { themes } from '../theme';
 import {BusyService} from '../../core/services/busy.service';
+import {HasRoleDirective} from '../../shared/directives/has-role.directive'
 
 
 @Component({
     selector: 'app-nav',
     standalone: true,
-    imports: [FormsModule, RouterLink, RouterModule],
+    imports: [FormsModule, RouterLink, RouterModule, HasRoleDirective],
     templateUrl: './nav.component.html',
     styleUrl: './nav.component.css'
 })

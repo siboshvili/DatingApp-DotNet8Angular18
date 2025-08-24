@@ -69,7 +69,7 @@ namespace API.Data.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("RefreshTokenexpiry")
+                    b.Property<DateTime?>("RefreshTokenExpiry")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")

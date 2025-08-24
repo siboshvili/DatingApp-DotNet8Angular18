@@ -113,7 +113,7 @@ namespace API.Data.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "RefreshTokenexpiry",
+                name: "RefreshTokenExpiry",
                 table: "AspNetUsers",
                 type: "TEXT",
                 nullable: true);
@@ -397,7 +397,7 @@ namespace API.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "RefreshTokenexpiry",
+                name: "RefreshTokenExpiry",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

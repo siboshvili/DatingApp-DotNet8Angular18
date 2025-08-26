@@ -20,12 +20,11 @@ export class MemberMessagesComponent implements OnInit {
     private memberService = inject(MemberService);
     protected presenceService = inject(PresenceService);
     private route = inject(ActivatedRoute);
-    protected messages = signal<Message[]>([]);
     protected messageContent = '';
 
     constructor() {
         effect(() => {
-            const currentMessages = this.messages();
+            const currentMessages = this.messageService.messageThread();
             if (currentMessages.length > 0) {
                 this.scrollToBottom();
             }
@@ -41,30 +40,12 @@ export class MemberMessagesComponent implements OnInit {
             }
         })
     }
-
-    loadMessages() {
-        const memberId = this.memberService.member()?.id;
-        if (memberId) {
-            this.messageService.getMessageThreed(memberId).subscribe({
-                next: messages => this.messages.set(messages.map(message => ({
-                    ...message,
-                    currentUserSender: message.senderId !== memberId
-                })))
-            });
-        }
-    }
-
+    
     sendMessage() {
         const recipientId = this.memberService.member()?.id;
         if (!recipientId) return;
-        this.messageService.sendMessage(recipientId, this.messageContent).subscribe({
-            next: message => {
-                this.messages.update(messages => {
-                    message.currentUserSender = true;
-                    return [...messages, message]
-                })
-                this.messageContent = ''
-            }
+        this.messageService.sendMessage(recipientId, this.messageContent)?.then(() => {
+            this.messageContent = '';
         })
     }
 

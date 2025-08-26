@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Interfaces;
 
@@ -12,4 +13,10 @@ public interface IMessageRepository
     Task<PaginatedResult<MessageDto>> GetMessagesFromMember(MessageParams messageParams);
     Task<IReadOnlyList<MessageDto>> GetMessageThread(string currentMemberId, string recipientId);
     Task<bool> SaveAllAsync();
+
+    void AddGroup(Group group);
+    Task RemoveConnection(string connectionId);
+    Task<Connection?> GetConnection(string connectionId);
+    Task<Group?> GetMessageGroup(string groupName);
+    Task<Group?> GetGroupForConnection(string connectionId);
 }

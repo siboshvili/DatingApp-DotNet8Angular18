@@ -70,6 +70,7 @@ export class AccountService {
         localStorage.removeItem('filters');
         this.likesService.clearLikdeIds();
         this.currentUser.set(null);
+        this.presenceService.stopHubConnection();
     }
 
     private getRolesFromToken(user: User): string[] {

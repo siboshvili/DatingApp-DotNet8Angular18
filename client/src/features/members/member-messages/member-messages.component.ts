@@ -43,7 +43,7 @@ export class MemberMessagesComponent implements OnInit {
     
     sendMessage() {
         const recipientId = this.memberService.member()?.id;
-        if (!recipientId) return;
+        if (!recipientId || !this.messageContent) return;
         this.messageService.sendMessage(recipientId, this.messageContent)?.then(() => {
             this.messageContent = '';
         })

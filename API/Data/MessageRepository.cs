@@ -48,14 +48,16 @@ public class MessageRepository(AppDbContext context) : IMessageRepository
     {
         await context.Messages
             .Where(x => x.RecipientId == currentMemberId
-                        && x.SenderId == recipientId
-                        && x.DateRead == null)
-            .ExecuteUpdateAsync(setters => setters.SetProperty(x =>
-                x.DateRead, DateTime.UtcNow));
+                        && x.SenderId == recipientId && x.DateRead == null)
+            .ExecuteUpdateAsync(setters => setters
+                .SetProperty(x => x.DateRead, DateTime.UtcNow));
 
         return await context.Messages
-            .Where(x => (x.RecipientId == currentMemberId && x.RecipientDeleted == false && x.SenderId == recipientId)
-                        || (x.SenderId == currentMemberId && x.SenderDeleted == true && x.RecipientId == recipientId))
+            .Where(x => (x.RecipientId == currentMemberId && x.RecipientDeleted == false
+                                                          && x.SenderId == recipientId)
+                        || (x.SenderId == currentMemberId
+                            && x.SenderDeleted == false && x.RecipientId == recipientId))
+            .OrderBy(x => x.MessageSent)
             .Select(MessageExtensions.ToDtoProjection())
             .ToListAsync();
     }
@@ -67,7 +69,7 @@ public class MessageRepository(AppDbContext context) : IMessageRepository
 
     public void AddGroup(Group group)
     {
-        throw new NotImplementedException();
+        context.Groups.Add(group);
     }
 
     public async Task RemoveConnection(string connectionId)

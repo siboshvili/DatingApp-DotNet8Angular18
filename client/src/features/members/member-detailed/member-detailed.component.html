@@ -7,7 +7,7 @@
                 <div class="flex flex-col items-center">
                     <div class="flex text-2xl text-primary items-center items-center">
                         {{ member.displayName }}, {{ member.dateOfBirth | age }}
-                        @if (presenceService.onlineUsers().includes(member.id)){
+                        @if (presenceService.onlineUsers().includes(member.id)) {
                             <span class="status status-success status-xl ml-3"></span>
                         }
                     </div>
@@ -26,8 +26,13 @@
                 </ul>
             </div>
             <div class="card-actions justify-between gap-2 px-2 mb-3">
-                <button class="btn btn-info">Go back</button>
-                <button class="btn btn-primary">Go back</button>
+                <button routerLink="/members" class="btn btn-info">Go back</button>
+                <button
+                        (click)="likesService.toggleLike(member.id)"
+                        [class.btn-error]="hasLiked()"
+                        [class.btn-success]="!hasLiked()"
+                        class="btn btn-primary">{{ hasLiked() ? 'Remove like' : 'Like user' }}
+                </button>
             </div>
         </div>
 
